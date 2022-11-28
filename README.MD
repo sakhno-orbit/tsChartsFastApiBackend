@@ -1,5 +1,5 @@
 
-stack
+#### stack
 
     docker
     python3
@@ -7,13 +7,29 @@ stack
     mongo
 
 
-requirements:
+#### requirements:
 
     docker
 
-UP backend
+#### up backend
 
     open terminal
     go to the project folder
-    run command
+    run command below
     docker-compose up -d
+
+#### down project
+
+    go to the project folder
+    open terminal
+    run command below
+    docker-compose down -v
+
+
+#### note
+
+for remove docker containers after tests use
+official docker documentation
+    
+https://docs.docker.com/
+
