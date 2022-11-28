@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_DB_DATABASE: default_db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - inner_network
+  web:
+    container_name: fastapi-web
+    command: 'uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload'
+    environment:
+      MONGODB_USER: root
+      MONGODB_PASSWORD: rootpassword
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    ports:
+      - '8000:8000'
+    depends_on:
+      - mongodb
+    networks:
+      - inner_network
+    volumes:
+      - ./src:/app/src
+
+networks:
+  inner_network:

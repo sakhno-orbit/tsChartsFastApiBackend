@@ -1,0 +1,6 @@
+venv
+
+.idea
+.env
+
+mongo_data
